@@ -53,6 +53,102 @@ public class AddressRelationsEntity {
 				+ ", pouKod=" + pouKod + ", orpKod=" + orpKod + ", okresKod=" + okresKod + ", vuscKod=" + vuscKod
 				+ ", voKod=" + voKod + "]";
 	}
+
+	public String getAdmKod() {
+		return admKod;
+	}
+
+	public void setAdmKod(String admKod) {
+		this.admKod = admKod;
+	}
+
+	public String getUliceKod() {
+		return uliceKod;
+	}
+
+	public void setUliceKod(String uliceKod) {
+		this.uliceKod = uliceKod;
+	}
+
+	public String getCobceKod() {
+		return cobceKod;
+	}
+
+	public void setCobceKod(String cobceKod) {
+		this.cobceKod = cobceKod;
+	}
+
+	public String getMomcKod() {
+		return momcKod;
+	}
+
+	public void setMomcKod(String momcKod) {
+		this.momcKod = momcKod;
+	}
+
+	public String getOpKod() {
+		return opKod;
+	}
+
+	public void setOpKod(String opKod) {
+		this.opKod = opKod;
+	}
+
+	public String getSpravobvKod() {
+		return spravobvKod;
+	}
+
+	public void setSpravobvKod(String spravobvKod) {
+		this.spravobvKod = spravobvKod;
+	}
+
+	public String getObecKod() {
+		return obecKod;
+	}
+
+	public void setObecKod(String obecKod) {
+		this.obecKod = obecKod;
+	}
+
+	public String getPouKod() {
+		return pouKod;
+	}
+
+	public void setPouKod(String pouKod) {
+		this.pouKod = pouKod;
+	}
+
+	public String getOrpKod() {
+		return orpKod;
+	}
+
+	public void setOrpKod(String orpKod) {
+		this.orpKod = orpKod;
+	}
+
+	public String getOkresKod() {
+		return okresKod;
+	}
+
+	public void setOkresKod(String okresKod) {
+		this.okresKod = okresKod;
+	}
+
+	public String getVuscKod() {
+		return vuscKod;
+	}
+
+	public void setVuscKod(String vuscKod) {
+		this.vuscKod = vuscKod;
+	}
+
+	public String getVoKod() {
+		return voKod;
+	}
+
+	public void setVoKod(String voKod) {
+		this.voKod = voKod;
+	}
 	
 
 }

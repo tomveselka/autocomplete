@@ -67,6 +67,7 @@ public class AddressEntity {
 	@Column(name = "Plati_Od")
 	private String platiOd;
 
+	
 	@Override
 	public String toString() {
 		return "AddressEntity [kodADM=" + kodADM + ", kodObce=" + kodObce + ", nazevObce=" + nazevObce + ", kodMOMC="

@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.tomveselka.autocomplete.addresses.entities.AddressEntity;
 import com.tomveselka.autocomplete.addresses.entities.AddressRelationsEntity;
 import com.tomveselka.autocomplete.addresses.entities.KrajEntity;
+import com.tomveselka.autocomplete.addresses.entities.ObecEntity;
 import com.tomveselka.autocomplete.addresses.entities.OkresEntity;
+import com.tomveselka.autocomplete.addresses.entities.StreetEntity;
 
 @SpringBootTest
 public class AddressRepositoryTest {
@@ -25,6 +27,12 @@ public class AddressRepositoryTest {
 	@Autowired
 	AddressRelationsRepository relationsRepo;
 
+	@Autowired
+	StreetRepository streetRepo;
+	
+	@Autowired
+	ObecRepository obecRepo;
+	
 	@Test
 	public void getAddressEntityByKodADMNotNull() {
 		// code for Pernerova 691/42
@@ -49,11 +57,27 @@ public class AddressRepositoryTest {
 	}
 	
 	@Test
-	public void getRelationInfo() {
+	public void getRelationInfoNotNull() {
 		String admCode = "8668922";
 		AddressRelationsEntity relationsEntity = relationsRepo.findByAdmKod(admCode);
 		System.out.println(relationsEntity.toString());
 		assertNotNull(relationsEntity);
+	}
+	
+	@Test
+	public void getObecInfoNotNull() {
+		String kod = "598925";
+		ObecEntity obecEntity = obecRepo.findByKod(kod);
+		System.out.println(obecEntity.toString());
+		assertNotNull(obecEntity);
+	}
+	
+	@Test
+	public void getStreetInfoNotNull() {
+		String kod = "7064";
+		StreetEntity streetEntity = streetRepo.findByKod(kod);
+		System.out.println(streetEntity.toString());
+		assertNotNull(streetEntity);
 	}
 
 }

@@ -1,8 +1,13 @@
 package com.tomveselka.autocomplete.addresses.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -46,13 +51,17 @@ public class AddressRelationsEntity {
 	@Column(name = "VO_KOD")
 	private String voKod;
 
-	@Override
-	public String toString() {
-		return "AddressRelationsEntity [admKod=" + admKod + ", uliceKod=" + uliceKod + ", cobceKod=" + cobceKod
-				+ ", momcKod=" + momcKod + ", opKod=" + opKod + ", spravobvKod=" + spravobvKod + ", obecKod=" + obecKod
-				+ ", pouKod=" + pouKod + ", orpKod=" + orpKod + ", okresKod=" + okresKod + ", vuscKod=" + vuscKod
-				+ ", voKod=" + voKod + "]";
-	}
+	@OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "relationsEntity")
+	AddressEntity addressEntity;
+	
+	//https://www.baeldung.com/hibernate-one-to-many
+	@ManyToOne
+	@JoinColumn(name="OKRES_KOD", referencedColumnName = "Kód", insertable=false, updatable=false)
+	private OkresEntity okresEntity;
+	
+	@ManyToOne
+	@JoinColumn(name="VUSC_KOD", referencedColumnName = "Kód", insertable=false, updatable=false)
+	private KrajEntity krajEntity;
 
 	public String getAdmKod() {
 		return admKod;
@@ -148,6 +157,14 @@ public class AddressRelationsEntity {
 
 	public void setVoKod(String voKod) {
 		this.voKod = voKod;
+	}
+
+	@Override
+	public String toString() {
+		return "AddressRelationsEntity [admKod=" + admKod + ", uliceKod=" + uliceKod + ", cobceKod=" + cobceKod
+				+ ", momcKod=" + momcKod + ", opKod=" + opKod + ", spravobvKod=" + spravobvKod + ", obecKod=" + obecKod
+				+ ", pouKod=" + pouKod + ", orpKod=" + orpKod + ", okresKod=" + okresKod + ", vuscKod=" + vuscKod
+				+ ", voKod=" + voKod + ", okresEntity=" + okresEntity.toString() + ", krajEntity=" + krajEntity.toString() + "]";
 	}
 	
 

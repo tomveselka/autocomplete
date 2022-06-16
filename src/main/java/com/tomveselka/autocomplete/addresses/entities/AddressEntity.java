@@ -1,8 +1,12 @@
 package com.tomveselka.autocomplete.addresses.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -67,18 +71,13 @@ public class AddressEntity {
 	@Column(name = "Plati_Od")
 	private String platiOd;
 
+	//because I always forget
+	//name = this table just column name, referencedColumnName = other table, just column name
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "Kod_ADM", referencedColumnName = "ADM_KOD")
+	private AddressRelationsEntity relationsEntity;
 	
-	@Override
-	public String toString() {
-		return "AddressEntity [kodADM=" + kodADM + ", kodObce=" + kodObce + ", nazevObce=" + nazevObce + ", kodMOMC="
-				+ kodMOMC + ", nazevMOMC=" + nazevMOMC + ", kodObvoduPrahy=" + kodObvoduPrahy + ", nazevObvoduPrahy="
-				+ nazevObvoduPrahy + ", kodCastiObce=" + kodCastiObce + ", nazevCastiObce=" + nazevCastiObce
-				+ ", kodUlice=" + kodUlice + ", nazevUlice=" + nazevUlice + ", typSO=" + typSO + ", cisloDomovni="
-				+ cisloDomovni + ", cisloOrientacni=" + cisloOrientacni + ", znakCislaOrientacniho="
-				+ znakCislaOrientacniho + ", psc=" + psc + ", souradniceY=" + souradniceY + ", souradniceX="
-				+ souradniceX + ", platiOd=" + platiOd + "]";
-	}
-
+	
 	public String getKodADM() {
 		return kodADM;
 	}
@@ -229,6 +228,25 @@ public class AddressEntity {
 
 	public void setPlatiOd(String platiOd) {
 		this.platiOd = platiOd;
+	}
+
+	@Override
+	public String toString() {
+		return "AddressEntity [kodADM=" + kodADM + ", kodObce=" + kodObce + ", nazevObce=" + nazevObce + ", kodMOMC="
+				+ kodMOMC + ", nazevMOMC=" + nazevMOMC + ", kodObvoduPrahy=" + kodObvoduPrahy + ", nazevObvoduPrahy="
+				+ nazevObvoduPrahy + ", kodCastiObce=" + kodCastiObce + ", nazevCastiObce=" + nazevCastiObce
+				+ ", kodUlice=" + kodUlice + ", nazevUlice=" + nazevUlice + ", typSO=" + typSO + ", cisloDomovni="
+				+ cisloDomovni + ", cisloOrientacni=" + cisloOrientacni + ", znakCislaOrientacniho="
+				+ znakCislaOrientacniho + ", psc=" + psc + ", souradniceY=" + souradniceY + ", souradniceX="
+				+ souradniceX + ", platiOd=" + platiOd + ", relationsEntity=" + relationsEntity.toString() + "]";
+	}
+
+	public AddressRelationsEntity getRelationsEntity() {
+		return relationsEntity;
+	}
+
+	public void setRelationsEntity(AddressRelationsEntity relationsEntity) {
+		this.relationsEntity = relationsEntity;
 	}
 
 }

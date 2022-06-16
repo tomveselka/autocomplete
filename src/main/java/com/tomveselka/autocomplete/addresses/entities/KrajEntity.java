@@ -1,8 +1,13 @@
 package com.tomveselka.autocomplete.addresses.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +26,9 @@ public class KrajEntity {
 	
 	@Column(name = "Název_Regionu_soudržnosti")
 	private String nazevRegionuSoudrznosti;
+	
+	@OneToMany(mappedBy = "krajEntity")
+	List<AddressRelationsEntity> relationsEntity;
 
 	@Override
 	public String toString() {

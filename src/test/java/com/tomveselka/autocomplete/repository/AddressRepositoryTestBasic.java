@@ -13,7 +13,7 @@ import com.tomveselka.autocomplete.addresses.entities.OkresEntity;
 import com.tomveselka.autocomplete.addresses.entities.StreetEntity;
 
 @SpringBootTest
-public class AddressRepositoryTest {
+public class AddressRepositoryTestBasic {
 
 	@Autowired
 	AddressRepository addressRepo;

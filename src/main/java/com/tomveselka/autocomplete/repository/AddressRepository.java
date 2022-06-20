@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.tomveselka.autocomplete.addresses.entities.AddressEntity;
 import com.tomveselka.autocomplete.addresses.entities.StreetEntity;
-import com.tomveselka.autocomplete.dto.AddressSearchResultObject;
+import com.tomveselka.autocomplete.dto.ObecDictionaryObject;
 
 public interface AddressRepository extends PagingAndSortingRepository<AddressEntity, String> {
 	

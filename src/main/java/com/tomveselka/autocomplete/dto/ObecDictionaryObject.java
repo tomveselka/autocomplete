@@ -24,4 +24,8 @@ public class ObecDictionaryObject {
 	public void setKod(String kod) {
 		this.kod = kod;
 	}
+	@Override
+	public String toString() {
+		return "ObecDictionaryObject [nazev=" + nazev + ", nazevDisplay=" + nazevDisplay + ", kod=" + kod + "]";
+	}
 }

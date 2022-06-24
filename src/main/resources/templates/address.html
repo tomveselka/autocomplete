@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Autocomplete test</title>
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<script>
+$(document).ready(function () {
+    $("#obecNameDisplay").autocomplete({
+        source:function(request, response) {    
+        	var obecInput = $('#obecNameDisplay').val();
+			var url = "/address_autocomplete/obec?obecInput="+encodeURIComponent(obecInput);
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                data: {
+                },
+               
+                success: function(data) {
+                	response($.map(data, function (value, key) {
+                        return {
+                            label: value.nazevDisplay,
+                            value: value
+                        };
+                    }))
+                }             
+            })       
+        },    
+        change: function (event, ui) {
+            //Forces input to source values, otherwise, clears
+            //NOTE : user could still submit right after typing => check server side
+            if (!ui.item) {
+              //http://api.jqueryui.com/autocomplete/#event-change -
+              // The item selected from the menu, if any. Otherwise the property is null
+              //so clear the item for force selection
+              $(event.target).val("");
+              $(event.target).addClass("is-invalid");
+            }
+            else {
+              $(event.target).removeClass("is-invalid");
+            }
+          },
+        select: function(event, ui) { 
+        	  event.preventDefault()
+          	 $('#obecKod').val(ui.item.value.kod);
+          	 $("#obecNameDisplay").val(ui.item.value.nazevDisplay);
+      		 $('#obecName').val(ui.item.value.nazev);          
+          },
+    	minLength : 3      
+    });
+});
+
+</script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-4 mt-5">
+			<form method="post" th:object="${addressData}" id="address">
+
+
+				<div class="form-group">
+					<div>
+						<label for="obec" th:text="#{address.label.city.display}">Obec</label>
+					</div>
+					<div> 
+						<input type="text" id="obecNameDisplay" class="form-control select2-single"
+						th:field="*{obecNameDisplay}" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div>
+						<label for="obecName" th:text="#{address.label.city.actual}">Obec</label>
+					</div>
+					<div> 
+						<input type="text" id="obecName" class="form-control select2-single"
+						th:field="*{obecName}" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div>
+						<label for="obecKod" th:text="#{address.label.city.code}">Obec</label>
+					</div>
+					<div> 
+						<input type="text" id="obecKod" class="form-control select2-single"
+						th:field="*{obecKod}" />
+					</div>
+				</div>
+				
+
+				<button class="btn btn-primary" type="submit" name="goToResults">Submit form</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

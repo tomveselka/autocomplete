@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Autocomplete test</title>
+</head>
+<body>
+	<div>
+		<form method="post" th:object="${addressData}">
+			<div>
+				<p >Display name</p>
+			</div>
+			<div>
+				<p th:text="${obecNameDisplay}"></p>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

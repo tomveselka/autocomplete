@@ -6,237 +6,105 @@
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
-<script>
-//https://stackoverflow.com/questions/51667936/jquery-autocomplete-fill-multiple-fields-by-selecting-suggested-option
-$(document).ready(function () {
-    $("#obecNameDisplay").autocomplete({
-        source:function(request, response) {    
-        	var obecInput = $('#obecNameDisplay').val();
-			var url = "/address_autocomplete/obec?obecInput="+encodeURIComponent(obecInput);
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                data: {
-                },
-               
-                success: function(data) {
-                	response($.map(data, function (value, key) {
-                        return {
-                            label: value.nazevDisplay,
-                            value: value
-                        };
-                    }))
-                }             
-            })       
-        },    
-        change: function (event, ui) {
-            //Forces input to source values, otherwise, clears
-            //NOTE : user could still submit right after typing => check server side
-            if (!ui.item) {
-              //http://api.jqueryui.com/autocomplete/#event-change -
-              // The item selected from the menu, if any. Otherwise the property is null
-              //so clear the item for force selection
-              $(event.target).val("");
-              $(event.target).addClass("is-invalid");
-            }
-            else {
-              $(event.target).removeClass("is-invalid");
-            }
-          },
-        select: function(event, ui) { 
-        	  event.preventDefault()
-          	 $('#obecKod').val(ui.item.value.kod);
-          	 $("#obecNameDisplay").val(ui.item.value.nazevDisplay);
-      		 $('#obecName').val(ui.item.value.nazev);          
-          },
-    	minLength : 3      
-    });
-    
-    $("#streetName").autocomplete({
-        source:function(request, response) {    
-        	var obecKod = $('#obecKod').val();
-        	var streetInput = $('#streetName').val();
-			var url = "/address_autocomplete/street?obecKod="+encodeURIComponent(obecKod)+"&streetInput="+encodeURIComponent(streetInput);
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                data: {
-                },
-               
-                success: function(data) {
-                	response($.map(data, function (value, key) {
-                        return {
-                            label: value.nazev,
-                            value: value
-                        };
-                    }))
-                }             
-            })       
-        },    
-        change: function (event, ui) {
-            //Forces input to source values, otherwise, clears
-            //NOTE : user could still submit right after typing => check server side
-            if (!ui.item) {
-              //http://api.jqueryui.com/autocomplete/#event-change -
-              // The item selected from the menu, if any. Otherwise the property is null
-              //so clear the item for force selection
-              $(event.target).val("");
-              $(event.target).addClass("is-invalid");
-            }
-            else {
-              $(event.target).removeClass("is-invalid");
-            }
-          },
-        select: function(event, ui) { 
-        	  event.preventDefault()
-          	 $('#streetName').val(ui.item.value.nazev);
-          	 $("#streetKod").val(ui.item.value.kod);       
-          },
-    	minLength : 3      
-    });
-    
-    $("#houseNumber").autocomplete({
-        source:function(request, response) {    
-        	var obecKod = $('#obecKod').val();
-        	var streetKod = $('#streetKod').val();
-        	var numberInput = $('#houseNumber').val();
-			var url = "/address_autocomplete/house?obecKod="+encodeURIComponent(obecKod)+"&streetKod="+encodeURIComponent(streetKod)+"&numberInput="+encodeURIComponent(numberInput);
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                data: {
-                },
-               
-                success: function(data) {
-                	response($.map(data, function (value, key) {
-                        return {
-                            label: value.cisloDisplay,
-                            value: value
-                        };
-                    }))
-                }             
-            })       
-        },    
-        change: function (event, ui) {
-            //Forces input to source values, otherwise, clears
-            //NOTE : user could still submit right after typing => check server side
-            if (!ui.item) {
-              //http://api.jqueryui.com/autocomplete/#event-change -
-              // The item selected from the menu, if any. Otherwise the property is null
-              //so clear the item for force selection
-              $(event.target).val("");
-              $(event.target).addClass("is-invalid");
-            }
-            else {
-              $(event.target).removeClass("is-invalid");
-            }
-          },
-        select: function(event, ui) { 
-        	  event.preventDefault()
-          	 $('#houseNumber').val(ui.item.value.cisloDisplay);
-          	 $("#zipCode").val(ui.item.value.zipCode);       
-          	 $("#kodADM").val(ui.item.value.kodADM);  
-          },
-    	minLength : 1      
-    });
-});
-
-</script>
-
+<link th:href="@{/css/address.css}" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript" th:src="@{/js/autocompleteAddress.js}"></script>
 </head>
 <body>
 	<div class="container">
-		<div class="col-md-4 mt-5">
-			<form method="post" th:object="${addressData}" id="address">
+		<div>
+			<form method="post" th:object="${addressData}" id="address" class="formWhole">
 
 
 				<div class="form-group">
 					<div>
-						<label for="obec" th:text="#{address.label.city.display}">Obec Display</label>
+						<label for="obec" th:text="#{address.label.city.display}" class="labelText">Obec
+							Display</label>
 					</div>
-					<div> 
-						<input type="text" id="obecNameDisplay" class="form-control select2-single"
-						th:field="*{obecNameDisplay}" />
-					</div>
-				</div>
-				
-				<div class="form-group">
 					<div>
-						<label for="obecName" th:text="#{address.label.city.actual}">Obec Actual</label>
-					</div>
-					<div> 
-						<input type="text" id="obecName" class="form-control select2-single"
-						th:field="*{obecName}" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div>
-						<label for="obecKod" th:text="#{address.label.city.code}">Obec Kod</label>
-					</div>
-					<div> 
-						<input type="text" id="obecKod" class="form-control select2-single"
-						th:field="*{obecKod}" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div>
-						<label for="streetName" th:text="#{address.label.street.name}">Street Name</label>
-					</div>
-					<div> 
-						<input type="text" id="streetName" class="form-control select2-single"
-						th:field="*{streetName}" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div>
-						<label for="streetKod" th:text="#{address.label.street.code}">Street Code</label>
-					</div>
-					<div> 
-						<input type="text" id="streetKod" class="form-control select2-single"
-						th:field="*{streetKod}" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div>
-						<label for="houseNumber" th:text="#{address.label.number}">Number</label>
-					</div>
-					<div> 
-						<input type="text" id="houseNumber" class="form-control select2-single"
-						th:field="*{houseNumber}" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div>
-						<label for="zipCode" th:text="#{address.label.psc}">PSC</label>
-					</div>
-					<div> 
-						<input type="text" id="zipCode" class="form-control select2-single"
-						th:field="*{zipCode}" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div>
-						<label for="kodADM" th:text="#{address.label.kodADM}">Kod ADM</label>
-					</div>
-					<div> 
-						<input type="text" id="kodADM" class="form-control select2-single"
-						th:field="*{kodADM}" />
+						<input type="text" id="obecNameDisplay" class="textInput"
+							th:field="*{obecNameDisplay}" />
 					</div>
 				</div>
 
-				<button class="btn btn-primary" type="submit" name="goToResults">Submit form</button>
+				<div class="form-group">
+					<div>
+						<label for="obecName" th:text="#{address.label.city.actual}" class="labelText">Obec
+							Actual</label>
+					</div>
+					<div>
+						<input type="text" id="obecName"
+							class="textInput" th:field="*{obecName}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<label for="obecKod" th:text="#{address.label.city.code}" class="labelText">Obec
+							Kod</label>
+					</div>
+					<div>
+						<input type="text" id="obecKod"
+							class="textInput" th:field="*{obecKod}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<label for="streetName" th:text="#{address.label.street.name}" class="labelText">Street
+							Name</label>
+					</div>
+					<div>
+						<input type="text" id="streetName"
+							class="textInput" th:field="*{streetName}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<label for="streetKod" th:text="#{address.label.street.code}" class="labelText">Street
+							Code</label>
+					</div>
+					<div>
+						<input type="text" id="streetKod"
+							class="textInput" th:field="*{streetKod}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<label for="houseNumber" th:text="#{address.label.number}" class="labelText">Number</label>
+					</div>
+					<div>
+						<input type="text" id="houseNumber"
+							class="textInput" th:field="*{houseNumber}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<label for="zipCode" th:text="#{address.label.psc}" class="labelText">PSC</label>
+					</div>
+					<div>
+						<input type="text" id="zipCode"
+							class="textInput" th:field="*{zipCode}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<label for="kodADM" th:text="#{address.label.kodADM}" class="labelText">Kod
+							ADM</label>
+					</div>
+					<div>
+						<input type="text" id="kodADM" class="textInput"
+							th:field="*{kodADM}" />
+					</div>
+				</div>
+
+				<button class="btn btn-primary forwardButton" type="submit" name="goToResults" th:text="#{address.button.forward}">Submit
+					form</button>
 			</form>
 		</div>
 	</div>

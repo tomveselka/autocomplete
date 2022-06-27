@@ -1,0 +1,33 @@
+@charset "UTF-8";
+.labelText{
+	font-family: Times New Roman, serif;
+	font-size: 16px	
+}
+
+.textInput {
+	width: 250px;
+	height: 20px;
+	color: black;
+	background-color: white;
+	border-style: solid;
+	border-width: thin;
+	font-family: Times New Roman, serif;
+	font-size: 16px;
+	margin-bottom: 5px
+}
+
+.forwardButton {
+	width: 80px;
+	height: 25px;
+	font-weight: bold;
+	color: white;
+	background-color: #ff0000;
+	border-style: groove;
+	border-color: #adacac;
+	margin-top: 20px
+}
+
+.formWhole{
+	margin: auto;
+	width: 400px
+}

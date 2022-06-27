@@ -10,13 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.tomveselka.autocomplete.model.AddressData;
 
 @Controller
-@SessionAttributes("clientData")
 public class MainController {
-
-	@ModelAttribute("addressData")
-	public AddressData clientData() {
-		return new AddressData();
-	}
 	
 	// PAGEONE
 	@GetMapping({ "", "/", "/address" })
@@ -26,9 +20,9 @@ public class MainController {
 	}
 
 	@PostMapping(value = "/address", params = "goToResults")
-	public String results(AddressData addressData, Model model) {
+	public String results(@ModelAttribute AddressData addressData, Model model) {
 		System.out.println("Got here");
-		//model.addAttribute("addressData", addressData);
+		model.addAttribute("addressData", addressData);
 		return "results";
 	}
 }

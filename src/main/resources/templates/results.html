@@ -8,10 +8,16 @@
 	<div>
 		<form method="post" th:object="${addressData}">
 			<div>
-				<p >Display name</p>
+				<p th:text="'Display name: '+${addressData.obecNameDisplay}"></p>
 			</div>
 			<div>
-				<p th:text="${obecNameDisplay}"></p>
+				<p th:text="'Street name: '+${addressData.streetName}"></p>
+			</div>
+			<div>
+				<p th:text="'House number: '+${addressData.houseNumber}"></p>
+			</div>
+			<div>
+				<p th:text="'ZIP code: '+${addressData.zipCode}"></p>
 			</div>
 		</form>
 	</div>

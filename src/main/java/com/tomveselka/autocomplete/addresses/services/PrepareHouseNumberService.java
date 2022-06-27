@@ -26,6 +26,7 @@ public class PrepareHouseNumberService {
 			object.setCisloOrientacni(entity.getCisloOrientacni());
 			object.setZnakCislaOrientacniho(entity.getZnakCislaOrientacniho());
 			object.setKodADM(entity.getKodADM());
+			object.setZipCode(entity.getPsc());
 			
 			StringBuilder str = new StringBuilder();
 			str.append(entity.getCisloDomovni());

@@ -12,12 +12,17 @@ import lombok.NoArgsConstructor;
 public class AddressData {
 
 	private ObecDictionaryObject obec;
+	private StreetEntity street;
+	private HouseDictionaryObject house;
+	
 	private String obecName;
 	private String obecNameDisplay;
 	private String obecKod;
-	private StreetEntity street;
-	private HouseDictionaryObject house;
+	private String streetName;
+	private String streetKod;
+	private String houseNumber;
 	private String zipCode;
+	private String kodADM;
 	public ObecDictionaryObject getObec() {
 		return obec;
 	}
@@ -59,6 +64,30 @@ public class AddressData {
 	}
 	public void setObecKod(String obecKod) {
 		this.obecKod = obecKod;
+	}
+	public String getStreetName() {
+		return streetName;
+	}
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+	public String getKodADM() {
+		return kodADM;
+	}
+	public void setKodADM(String kodADM) {
+		this.kodADM = kodADM;
+	}
+	public String getStreetKod() {
+		return streetKod;
+	}
+	public void setStreetKod(String streetKod) {
+		this.streetKod = streetKod;
 	}
 	
 	

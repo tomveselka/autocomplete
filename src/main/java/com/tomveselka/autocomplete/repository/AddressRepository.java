@@ -14,7 +14,7 @@ public interface AddressRepository extends PagingAndSortingRepository<AddressEnt
 	
 	AddressEntity findByKodADM (String kodADM);
 	
-	@Query(value="SELECT * FROM adresni_mista a WHERE (a.Kod_obce = :obecKod) AND (a.Kod_ulice = :streetKod) AND ((a.Cislo_domovni LIKE concat(:cislo,'%')) OR (a.Cislo_orientacni LIKE concat(:cislo,'%')))", nativeQuery=true)
-	List<AddressEntity> findByNazevAndObecKod(@Param("obecKod") String obecKod,@Param("streetKod") String streetKod, @Param("cislo")String cislo);
+	@Query(value="SELECT * FROM adresni_mista a WHERE (a.Kod_obce = :obecKod) AND (a.Kod_ulice = :streetKod) AND ((a.Cislo_domovni LIKE concat(:cislo,'%')) OR (a.Cislo_orientacni LIKE concat(:cislo,'%')) OR (a.Znak_cisla_orientacniho LIKE concat(:cislo,'%')))", nativeQuery=true)
+	List<AddressEntity> findByNazevAndObecKodAndStreetKod(@Param("obecKod") String obecKod,@Param("streetKod") String streetKod, @Param("cislo")String cislo);
 
 }

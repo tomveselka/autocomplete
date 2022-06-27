@@ -53,7 +53,7 @@ public class DictionaryPreparationTests {
 		String uliceKod = "463906";
 		//Cislo
 		String cislo = "4";
-		List<AddressEntity> addressEntities = addressRepo.findByNazevAndObecKod(obecKod, uliceKod, cislo);
+		List<AddressEntity> addressEntities = addressRepo.findByNazevAndObecKodAndStreetKod(obecKod, uliceKod, cislo);
 		List<HouseDictionaryObject> dictList =  listPreparationHouse.prepareList(addressEntities);
 		for (HouseDictionaryObject object : dictList) {
 			System.out.println(

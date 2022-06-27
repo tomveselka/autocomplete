@@ -7,7 +7,7 @@ public class HouseDictionaryObject {
 	private String znakCislaOrientacniho;
 	private String kodADM;
 	private String cisloDisplay;
-	
+	private String zipCode;
 
 	public String getZnakCislaOrientacniho() {
 		return znakCislaOrientacniho;
@@ -38,5 +38,11 @@ public class HouseDictionaryObject {
 	}
 	public void setCisloOrientacni(String cisloOrientacni) {
 		this.cisloOrientacni = cisloOrientacni;
+	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 }

@@ -59,8 +59,8 @@ public class AddressRepositoryTestAdvanced {
 		//Pernerova
 		String uliceKod = "463906";
 		//Cislo
-		String cislo = "42";
-		List<AddressEntity> addressEntities = addressRepo.findByNazevAndObecKod(obecKod, uliceKod, cislo);
+		String cislo = "a";
+		List<AddressEntity> addressEntities = addressRepo.findByNazevAndObecKodAndStreetKod(obecKod, uliceKod, cislo);
 		for (AddressEntity entity : addressEntities) {
 			System.out.println(entity.getKodADM());
 		}

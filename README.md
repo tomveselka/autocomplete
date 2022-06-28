@@ -17,3 +17,35 @@ In addition, there are additional tables needed:
 In those cases, I didnt find immediate "Download" button, instead I clicked "Vyhledat" without any parameters, which returned list of all Kraj/Okres and then choose "Export CSV"
 
 - Last needed file is mapping between ADM and Okresy and Kraje, which can be found [here](https://nahlizenidokn.cuzk.cz/StahniAdresniMistaRUIAN.aspx) just like ADM list  under "Hierarchie prvků RÚIAN", which upon unpacking contains multiple csv, we need one called "adresni-mista-vazby-cr"
+
+![Mapping](/ReadMe%20images/autocomplete%20mapping.png) 
+
+
+## Importing data
+Scripts for creation of tables are in aptly named folder "SQL scripts". In addition, there are scripts for importing multiple csv at once, since ADM are in separate csv for each Obec. Last script is for general import with proper encoding which handles Czech special characters.
+
+## Example
+Please be aware that primary goal was *Autocomplete*, resp. searching for addresses, *not* the front-end. As such, design of form is rather minimalistic, as it is only there to actually see the Autocomplete in action. In addition, there are more fields than would realisticaly be shown to user, however they are needed for logic and to check results, they are visible here.
+
+This is how form looks before searching
+
+![Form](/ReadMe%20images/autocomplete%20form.png) 
+
+
+After three letters are typed, Autocomplete starts offering options. In case when there are multiple places of same name, Okres is added in brackets (this is merely display name, there is additional field containing actual name without Okres)
+
+![City options](/ReadMe%20images/autocomplete%20city%20list.png)    ![City selected](/ReadMe%20images/autocomplete%20city%20selected.png)
+
+Same works for Street.
+
+Last part is house number, which is specific in that it searches in THREE potential columns - House number (Red table on house), Street number (Blue table on house) and by letter which on some occasions is added (ex. "Pernerova 559/44a")
+
+![City selected](/ReadMe%20images/autocomplete%20house%20number%20list.png)
+
+
+And we are done, below is final result as well as check on CUZK that ADM number is correct
+
+![Result](/ReadMe%20images/autocomplete%20fin.png)
+
+![Result](/ReadMe%20images/autocomplete%20cuzk%20check.png)
+

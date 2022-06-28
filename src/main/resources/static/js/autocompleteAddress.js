@@ -47,7 +47,7 @@ $(document).ready(function () {
          	 $("#zipCode").val('');       
          	 $("#kodADM").val('');  
           },
-    	minLength : 3      
+    	minLength : 3    
     });
     
     $("#streetName").autocomplete({

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link th:href="@{/css/address.css}" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript" th:src="@{/js/autocompleteCompany.js}"></script>
+<title>Autocomplete test</title>
+</head>
+<body>
+	<form method="post" th:object="${companyData}" id="company"
+		class="formWhole">
+		<div class="form-group">
+			<div>
+				<label for="name" th:text="#{company.name}" class="labelText">Company
+					Name</label>
+			</div>
+			<div>
+				<input type="text" id="name" class="textInput" th:field="*{name}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="ico" th:text="#{company.ico}" class="labelText">ICO</label>
+			</div>
+			<div>
+				<input type="text" id="ico" class="textInput" th:field="*{ico}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="dateOfCreation" th:text="#{company.creationDate}"
+					class="labelText">Date of Creation</label>
+			</div>
+			<div>
+				<input type="text" id="dateOfCreation" class="textInput"
+					th:field="*{dateOfCreation}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="name" th:text="#{company.form}" class="labelText">Company
+					Form</label>
+			</div>
+			<div>
+				<input type="text" id="companyForm" class="textInput"
+					th:field="*{companyForm}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="numberOfEmpl" th:text="#{company.employees}" class="labelText">Number
+					of Employees</label>
+			</div>
+			<div>
+				<select name="numberOfEmpl">
+					<option
+						th:each="numberOption : ${T(com.tomveselka.autocomplete.enums.NumberOfEmployeesEnum).values()}"
+						th:value="${numberOption}" th:text="${numberOption.displayValue}"></option>
+				</select>
+			</div>
+		</div>
+		<!--
+		<div class="form-group">
+			<div>
+				<label for="name" th:text="#{company.sector}" class="labelText">Sector</label>
+			</div>
+			<div>
+				<input type="text" id="sector" class="textInput"
+					th:field="*{sector}" />
+			</div>
+		</div>-->
+		<div class="form-group">
+			<div>
+				<label for="city" th:text="#{company.city}" class="labelText">City</label>
+			</div>
+			<div>
+				<input type="text" id="city" class="textInput" th:field="*{city}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="street" th:text="#{company.street}" class="labelText">Street</label>
+			</div>
+			<div>
+				<input type="text" id="street" class="textInput"
+					th:field="*{street}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="houseNumber" th:text="#{company.house}"
+					class="labelText">House number</label>
+			</div>
+			<div>
+				<input type="text" id="houseNumber" class="textInput"
+					th:field="*{houseNumber}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<label for="zipCode" th:text="#{company.zip}" class="labelText">ZIP
+					code</label>
+			</div>
+			<div>
+				<input type="text" id="zipCode" class="textInput"
+					th:field="*{zipCode}" />
+			</div>
+		</div>
+		<button class="btn btn-primary forwardButton" type="submit"
+			name="goToResults" th:text="#{company.button.forward}">Submit
+			form</button>
+	</form>
+</body>
+</html>

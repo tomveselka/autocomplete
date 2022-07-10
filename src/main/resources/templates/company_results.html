@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Autocomplete test</title>
+</head>
+<body>
+<div>
+		<form method="post" th:object="${companyData}">
+			<div>
+				<p th:text="'Company name: '+${companyData.name}"></p>
+			</div>
+			<div>
+				<p th:text="'ICO: '+${companyData.ico}"></p>
+			</div>
+			<div>
+				<p th:text="'Date of establishment: '+${companyData.dateOfCreation}"></p>
+			</div>
+
+		</form>
+	</div>
+</body>
+</html>

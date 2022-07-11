@@ -2,6 +2,9 @@
 
 This is small Java project to try creating an autocomplete feature for addresses in Czechia, using publicly available data from Katastr, published regularly in csv and imported into database (in my case, Microsoft SQL Server). 
 
+
+## Address
+
 ## Data sources
 Files are distributed amongst multiple pages on cuzk.cz.
 
@@ -49,3 +52,17 @@ And we are done, below is final result as well as check on CUZK that ADM number 
 
 ![Result](/ReadMe%20images/autocomplete%20cuzk%20check.png)
 
+
+
+## Company
+
+## Data sources
+
+Files are available on website of Czech Statistics Office
+
+- Main file is list of all Companies and FO with bussiness in Czechia, over 3,2 million of them, which are updated twice a month (1. and 15. day) and is available [here](https://www.czso.cz/csu/czso/registr-ekonomickych-subjektu-otevrena-data).
+- Documentation for the file, as well as multiple dictionaries can all be found [here](https://www.czso.cz/csu/czso/registr-ekonomickych-subjektu-otevrena-data-dokumentace).
+
+## Example
+
+This is much simpler autocomplete than address, since there is no "multi-stage" selection. User simply starts typing either name, or ICO of company and relevant list of offers appears. When it is selected, all data are filed in.

@@ -66,3 +66,7 @@ Files are available on website of Czech Statistics Office
 ## Example
 
 This is much simpler autocomplete than address, since there is no "multi-stage" selection. User simply starts typing either name, or ICO of company and relevant list of offers appears. When it is selected, all data are filed in.
+
+![Options](/ReadMe%20images/company_options.png) ![Result](/ReadMe%20images/company_results.png) 
+
+
